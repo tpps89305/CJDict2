@@ -1,0 +1,16 @@
+PODS:
+  - cjdict (1.0)
+
+DEPENDENCIES:
+  - cjdict (from `../cjdict`)
+
+EXTERNAL SOURCES:
+  cjdict:
+    :path: "../cjdict"
+
+SPEC CHECKSUMS:
+  cjdict: b921053e0a8713c2423d556715288692a50d932b
+
+PODFILE CHECKSUM: d23f574bdce67c834e754fa54144c0a2cc27587f
+
+COCOAPODS: 1.11.2

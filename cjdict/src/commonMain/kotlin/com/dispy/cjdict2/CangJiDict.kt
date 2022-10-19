@@ -7,9 +7,8 @@ package com.dispy.cjdict2
  * @since 2022/5/28
  */
 abstract class CangJiDict {
-    lateinit var cjChar: ArrayList<String>
-    lateinit var cjCode: ArrayList<String>
     lateinit var cjRoot: ArrayList<String>
+    lateinit var cjDict: HashMap<String, String>
 
     open fun getCangJiCode(words: String): ArrayList<CangWord> {
         val rootArray = ArrayList<CangWord>()
@@ -30,15 +29,8 @@ abstract class CangJiDict {
      * @return 查詢結果
      **/
      private fun getKeyCode(word: String): String {
-        return if (word.length <= 1) {
-            var code = ""
-            for (i in cjChar.indices) {
-                if (word == cjChar[i]) {
-                    code = cjCode[i]
-                    break
-                }
-            }
-            code
+        return if (word.length == 1) {
+            cjDict[word].toString()
         } else {
             ""
         }

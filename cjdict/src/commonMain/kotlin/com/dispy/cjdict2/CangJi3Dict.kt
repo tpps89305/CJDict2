@@ -6,10 +6,14 @@ package com.dispy.cjdict2
  * @author Dispy-Yang
  * @since 2022/5/28
  */
-class CangJi3Dict(cjchar: String, cjcode: String, cjroot: String) : CangJiDict() {
+class CangJi3Dict : CangJiDict() {
     init {
-        cjChar = cjchar.split(",") as ArrayList<String>
-        cjCode = cjcode.split(",") as ArrayList<String>
-        cjRoot = cjroot.split(",") as ArrayList<String>
+        cjRoot = cjCodeData.split(",") as ArrayList<String>
+        cjDict = hashMapOf()
+        for (eachRow in cj3DictData.split("\n")) {
+            val dictKey = eachRow.split(",")[0]
+            val dictValue = eachRow.split(",")[1]
+            cjDict[dictKey] = dictValue
+        }
     }
 }

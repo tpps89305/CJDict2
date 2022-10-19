@@ -13,18 +13,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val cj5 = FileReader.loadFile(applicationContext, R.raw.cj5_origin)
-        val cjroot = FileReader.loadFile(applicationContext, R.raw.cjroot)
-
         // 倉頡第三代
-        val dict = CangJi3Dict(
-            cjchar = FileReader.loadFile(applicationContext, R.raw.cjchar),
-            cjcode = FileReader.loadFile(applicationContext, R.raw.cjcode),
-            cjroot = cjroot
-        )
+        val dict = CangJi3Dict()
 
         // 倉頡第五代
-        val dict5 = CangJi5Dict(cj5.split("\r\n").toTypedArray(), cjroot)
+        val dict5 = CangJi5Dict()
 
         val editText: EditText = findViewById(R.id.editText)
         val button: Button = findViewById(R.id.button)

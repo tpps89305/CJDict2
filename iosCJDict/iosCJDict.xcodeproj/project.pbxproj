@@ -52,7 +52,6 @@
 				3E467562B7F4086BE43050FE /* Pods-iosCJDict.debug.xcconfig */,
 				31FBBE1B2C5A2E4F6351327D /* Pods-iosCJDict.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -321,13 +320,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"iosCJDict/Preview Content\"";
+				DEVELOPMENT_TEAM = 9KMT2XHYS7;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iosCJDict/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = orgIdentifier.iosCJDict;
+				PRODUCT_BUNDLE_IDENTIFIER = dispy.tool.cangjiedict;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -341,13 +341,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"iosCJDict/Preview Content\"";
+				DEVELOPMENT_TEAM = 9KMT2XHYS7;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iosCJDict/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = orgIdentifier.iosCJDict;
+				PRODUCT_BUNDLE_IDENTIFIER = dispy.tool.cangjiedict;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -2,10 +2,24 @@ import SwiftUI
 import cjdict
 
 struct ContentView: View {
-	let greet = Greeting().greeting()
+    @State var input = ""
+    @State var result = ""
+    var cangJi5 = CangJi5Dict()
 
 	var body: some View {
-		Text(greet)
+        VStack {
+            HStack {
+                TextField("輸入欲查詢的字", text: $input)
+                Button("查詢") {
+                    var array = cangJi5.getCangJiCode(words: input) as! [CangWord]
+                    if (!array.isEmpty) {
+                        self.result = array[0].root
+                    }
+                }
+            }
+            Text(result)
+        }
+        .padding(10.0)
 	}
 }
 

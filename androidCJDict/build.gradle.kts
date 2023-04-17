@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    compileSdk = 32
+    compileSdk = 33
     defaultConfig {
         applicationId = "dispy.tool.cangjiedict"
         minSdk = 24
-        targetSdk = 32
+        targetSdk = 33
         versionCode = 1
         versionName = "1.0"
     }
@@ -17,6 +17,7 @@ android {
             isMinifyEnabled = false
         }
     }
+    namespace = "com.dispy.cjdict2.android"
 }
 
 dependencies {

@@ -18,6 +18,9 @@ struct SettingsView: View {
                     Toggle(isOn: $isShowKey) {
                         Text("顯示對應按鍵")
                     }
+                    .onChange(of: isShowKey) { newValue in
+                        SettingHandler.shared.showRoot = isShowKey
+                    }
                     SetApperanceButton()
                 }
                 Section(header: Text("記錄設定")) {

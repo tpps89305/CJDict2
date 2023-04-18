@@ -13,33 +13,20 @@ struct HomeView: View {
     @State var input = ""
     var cangJi5 = CangJi5Dict()
     @State var testArray: [CangWord] = []
+    @State var showRoot = true
     
     var body: some View {
         NavigationView {
             VStack(spacing: 0.0) {
-                HStack {
-                    TextField("輸入欲查詢的字", text: $input)
-                        .padding(16.0)
-                        .onChange(of: input, perform: { newValue in
-                            let array = cangJi5.getCangJiCode(words: newValue) as! [CangWord]
-                            if (!array.isEmpty) {
-                                self.testArray = array
-                            } else {
-                                self.testArray.removeAll()
-                            }
-                    })
-                    if (input.isEmpty) {
-                        Button {
-                            input = ""
-                        } label: {
-                            Image(systemName: "xmark.circle.fill")
-                                .resizable()
-                                .foregroundColor(Color.gray)
-                                .frame(width: 25.0, height: 25.0)
+                SearchField(input: $input)
+                    .onChange(of: input, perform: { newValue in
+                        let array = cangJi5.getCangJiCode(words: newValue) as! [CangWord]
+                        if (!array.isEmpty) {
+                            self.testArray = array
+                        } else {
+                            self.testArray.removeAll()
                         }
-                        .padding(.trailing, 20.0)
-                    }
-                }
+                    })
                 Rectangle()
                     .fill(Color.gray)
                     .frame(height: 1.0)
@@ -47,7 +34,7 @@ struct HomeView: View {
                     CangDictTile(
                         word: testArray[index].word,
                         root: testArray[index].root,
-                        letter: testArray[index].letter
+                        letter: showRoot ? testArray[index].letter : ""
                     )
                     .listRowInsets(EdgeInsets())
                 }
@@ -59,11 +46,38 @@ struct HomeView: View {
             .navigationTitle("倉頡字典")
             .navigationBarTitleDisplayMode(.inline)
         }
+        .onAppear {
+            showRoot = SettingHandler.shared.showRoot
+        }
     }
 }
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
+    }
+}
+
+private struct SearchField: View {
+    
+    @Binding var input: String
+    
+    var body: some View {
+        HStack {
+            TextField("輸入欲查詢的字", text: $input)
+                .padding(16.0)
+            
+            if (!input.isEmpty) {
+                Button {
+                    input = ""
+                } label: {
+                    Image(systemName: "xmark.circle.fill")
+                        .resizable()
+                        .foregroundColor(Color.gray)
+                        .frame(width: 25.0, height: 25.0)
+                }
+                .padding(.trailing, 20.0)
+            }
+        }
     }
 }

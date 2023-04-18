@@ -20,12 +20,12 @@ struct CangDictTile: View {
             HStack(alignment: .bottom) {
                 Text(word)
                     .font(.system(size: 28))
-                    .foregroundColor(Color.white)
+                    .foregroundColor(Color("Title"))
                 HStack {
                     Text(root)
-                        .foregroundColor(Color.white)
+                        .foregroundColor(Color("Title"))
                     Text(letter)
-                        .foregroundColor(Color.white)
+                        .foregroundColor(Color("Title"))
                 }
                 .padding(.bottom, 2.0)
                 

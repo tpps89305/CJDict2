@@ -2,16 +2,15 @@ import SwiftUI
 import cjdict
 
 struct ContentView: View {
-    @State var input = ""
-    var cangJi5 = CangJi5Dict()
-    @State var testArray: [CangWord] = []
-    
     init() {
         let coloredAppearance = UINavigationBarAppearance()
         coloredAppearance.backgroundColor = UIColor(named: "Primary")
         coloredAppearance.titleTextAttributes = [
-            .foregroundColor: UIColor.white,
+            .foregroundColor: UIColor(named: "Title")!,
             .font: UIFont.systemFont(ofSize: 20)
+        ]
+        coloredAppearance.largeTitleTextAttributes = [
+            .foregroundColor: UIColor(named: "Title")!,
         ]
         UINavigationBar.appearance().standardAppearance = coloredAppearance
         UINavigationBar.appearance().compactAppearance = coloredAppearance
@@ -19,36 +18,15 @@ struct ContentView: View {
     }
 
     var body: some View {
-        NavigationView {
-            VStack(spacing: 0.0) {
-                TextField("輸入欲查詢的字", text: $input)
-                    .padding(16.0)
-                    .onChange(of: input, perform: { newValue in
-                        let array = cangJi5.getCangJiCode(words: newValue) as! [CangWord]
-                        if (!array.isEmpty) {
-                            self.testArray = array
-                        } else {
-                            self.testArray.removeAll()
-                        }
-                    })
-                Rectangle()
-                    .fill(Color.gray)
-                    .frame(height: 1.0)
-                List(testArray.indices, id: \.self) { index in
-                    CangDictTile(
-                        word: testArray[index].word,
-                        root: testArray[index].root,
-                        letter: testArray[index].letter
-                    )
-                    .listRowInsets(EdgeInsets())
-                }
-                .padding(.all)
-                .listStyle(.plain)
-                Spacer()
-            }
-            
-            .navigationTitle("倉頡字典")
-            .navigationBarTitleDisplayMode(.inline)
+        TabView {
+            HomeView().tabItem {
+                Image(systemName: "iphone.homebutton")
+                Text("主畫面")
+            }.tag(1)
+            SettingsView().tabItem {
+                Image(systemName: "gearshape")
+                Text("設定")
+            }.tag(2)
         }
     }
 }

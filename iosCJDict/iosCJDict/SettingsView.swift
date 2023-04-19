@@ -7,9 +7,11 @@
 //
 
 import SwiftUI
+import cjdict
 
 struct SettingsView: View {
     @State var isShowKey = false
+    let settings = SettingHandler(context: NSObject())
     
     var body: some View {
         NavigationView {
@@ -19,7 +21,7 @@ struct SettingsView: View {
                         Text("顯示對應按鍵")
                     }
                     .onChange(of: isShowKey) { newValue in
-                        SettingHandler.shared.showRoot = isShowKey
+                        settings.setShowRoot(value: isShowKey)
                     }
                     SetApperanceButton()
                 }
@@ -34,6 +36,9 @@ struct SettingsView: View {
             }
             
             .navigationTitle("設定")
+        }
+        .onAppear {
+            isShowKey = settings.getShowRoot()
         }
     }
 }

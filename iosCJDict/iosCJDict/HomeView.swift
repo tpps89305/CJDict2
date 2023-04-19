@@ -14,6 +14,7 @@ struct HomeView: View {
     var cangJi5 = CangJi5Dict()
     @State var testArray: [CangWord] = []
     @State var showRoot = true
+    let settings = SettingHandler(context: NSObject())
     
     var body: some View {
         NavigationView {
@@ -47,7 +48,7 @@ struct HomeView: View {
             .navigationBarTitleDisplayMode(.inline)
         }
         .onAppear {
-            showRoot = SettingHandler.shared.showRoot
+            showRoot = settings.getShowRoot()
         }
     }
 }

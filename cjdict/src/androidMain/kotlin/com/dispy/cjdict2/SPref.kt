@@ -24,3 +24,27 @@ actual fun SPref.setBool(key: String, value: Boolean) {
     editor.putBoolean(key, value)
     editor.apply()
 }
+
+actual fun SPref.getInt(key: String): Int {
+    val prefs: SharedPreferences = this.getSharedPreferences(SettingHandlerTag.TAG_SETTING, MODE_PRIVATE)
+    return prefs.getInt(key, 0)
+}
+
+actual fun SPref.setInt(key: String, value: Int) {
+    val prefs: SharedPreferences = this.getSharedPreferences(SettingHandlerTag.TAG_SETTING, MODE_PRIVATE)
+    val editor = prefs.edit()
+    editor.putInt(key, value)
+    editor.apply()
+}
+
+actual fun SPref.getString(key: String): String {
+    val prefs: SharedPreferences = this.getSharedPreferences(SettingHandlerTag.TAG_SETTING, MODE_PRIVATE)
+    return prefs.getString(key, "") ?: ""
+}
+
+actual fun SPref.setString(key: String, value: String) {
+    val prefs: SharedPreferences = this.getSharedPreferences(SettingHandlerTag.TAG_SETTING, MODE_PRIVATE)
+    val editor = prefs.edit()
+    editor.putString(key, value)
+    editor.apply()
+}

@@ -49,6 +49,8 @@ struct HomeView: View {
         }
         .onAppear {
             showRoot = settings.getShowRoot()
+            print("最近查詢數量：\(settings.getRecentAmount())")
+            print("套用主題：\(settings.getTheme())")
         }
     }
 }

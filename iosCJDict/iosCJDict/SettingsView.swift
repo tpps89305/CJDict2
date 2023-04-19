@@ -23,10 +23,14 @@ struct SettingsView: View {
                     .onChange(of: isShowKey) { newValue in
                         settings.setShowRoot(value: isShowKey)
                     }
-                    SetApperanceButton()
+                    SetApperanceButton { themeTag in
+                        settings.setTheme(value: themeTag)
+                    }
                 }
                 Section(header: Text("記錄設定")) {
-                    SetAmountButton()
+                    SetAmountButton { recentAmount in
+                        settings.setRecentAmount(value: Int32(recentAmount))
+                    }
                     
                     DeleteRecordButton()
                 }
@@ -52,6 +56,7 @@ struct SettingsView_Previews: PreviewProvider {
 private struct SetApperanceButton: View {
     
     @State var isShowApperanceDialog = false
+    var response: ((_ themeTag: String) -> Void)
     
     var body: some View {
         Button {
@@ -68,13 +73,13 @@ private struct SetApperanceButton: View {
         .actionSheet(isPresented: $isShowApperanceDialog) {
             ActionSheet(title: Text("顯示模式"), buttons: [
                 .default(Text("一般")) {
-                    
+                    response("一般")
                 },
                 .default(Text("暗色")) {
-                    
+                    response("暗色")
                 },
                 .default(Text("比照系統設定")) {
-                    
+                    response("比照系統設定")
                 }
             ])
         }
@@ -84,6 +89,7 @@ private struct SetApperanceButton: View {
 private struct SetAmountButton: View {
     
     @State var isShowAmountDialog = false
+    var response: ((_ recentAmount: Int) -> Void)
     
     var body: some View {
         Button {
@@ -100,19 +106,19 @@ private struct SetAmountButton: View {
         .actionSheet(isPresented: $isShowAmountDialog) {
             ActionSheet(title: Text("最近查詢數量"), buttons: [
                 .default(Text("10")) {
-                    
+                    response(10)
                 },
                 .default(Text("30")) {
-                    
+                    response(30)
                 },
                 .default(Text("50")) {
-                    
+                    response(50)
                 },
                 .default(Text("70")) {
-                    
+                    response(70)
                 },
                 .default(Text("100")) {
-                    
+                    response(100)
                 }
             ])
         }

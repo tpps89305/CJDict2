@@ -7,6 +7,9 @@ package com.dispy.cjdict2
  * @since 2023/4/19
  */
 object SettingHandlerTag {
-    val TAG_SETTING = "SETTING"
-    val TAG_SHOW_ROOT = "ROOT"
+    const val TAG_SETTING = "SETTING"
+    const val TAG_SHOW_ROOT = "ROOT"
+    const val TAG_USE_CANG5 = "CANG5"
+    const val TAG_RECENT_AMOUNT = "AMOUNT"
+    const val TAG_THEME = "THEME"
 }

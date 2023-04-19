@@ -9,3 +9,4 @@ pluginManagement {
 rootProject.name = "CJDict2"
 include(":androidCJDict")
 include(":cjdict")
+include(":composeCJDict")

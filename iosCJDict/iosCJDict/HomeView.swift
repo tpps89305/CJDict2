@@ -12,6 +12,7 @@ import cjdict
 struct HomeView: View {
     @State var input = ""
     var cangJi5 = CangJi5Dict()
+    let database = CJDictDatabase(databaseDriverFactory: DatabaseDriverFactory())
     @State var testArray: [CangWord] = []
     @State var showRoot = true
     let settings = SettingHandler(context: NSObject())
@@ -38,6 +39,10 @@ struct HomeView: View {
                         letter: showRoot ? testArray[index].letter : ""
                     )
                     .listRowInsets(EdgeInsets())
+                    .onTapGesture {
+                        // 測試資料庫功能
+                        database.insertSave(data: testArray[index].word)
+                    }
                 }
                 .padding(.all)
                 .listStyle(.plain)
@@ -48,9 +53,13 @@ struct HomeView: View {
             .navigationBarTitleDisplayMode(.inline)
         }
         .onAppear {
+            // 測試資料庫功能
             showRoot = settings.getShowRoot()
             print("最近查詢數量：\(settings.getRecentAmount())")
             print("套用主題：\(settings.getTheme())")
+            for each in database.selectAllSaves() {
+                print("儲存的資料 = \(each)")
+            }
         }
     }
 }

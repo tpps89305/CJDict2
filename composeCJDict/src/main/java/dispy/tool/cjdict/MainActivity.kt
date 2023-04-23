@@ -10,6 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.dispy.cjdict2.Greeting
 import dispy.tool.cjdict.ui.theme.CJDict2Theme
 
 class MainActivity : ComponentActivity() {
@@ -22,7 +23,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    Hello()
                 }
             }
         }
@@ -30,9 +31,9 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
+fun Hello(modifier: Modifier = Modifier) {
     Text(
-        text = "Hello $name!",
+        text = Greeting().greeting(),
         modifier = modifier
     )
 }
@@ -41,6 +42,6 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Composable
 fun GreetingPreview() {
     CJDict2Theme {
-        Greeting("Android")
+        Hello()
     }
 }

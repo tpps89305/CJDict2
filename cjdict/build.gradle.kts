@@ -20,6 +20,7 @@ kotlin {
         podfile = project.file("../iosCJDict/Podfile")
         framework {
             baseName = "cjdict"
+            isStatic = false
         }
     }
 

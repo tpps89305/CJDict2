@@ -60,6 +60,8 @@ struct HomeView: View {
             for each in database.selectAllSaves() {
                 print("儲存的資料 = \(each)")
             }
+        }.onTapGesture {
+            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
         }
     }
 }

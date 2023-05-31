@@ -33,16 +33,22 @@ struct HomeView: View {
                     .fill(Color.gray)
                     .frame(height: 1.0)
                 List(testArray.indices, id: \.self) { index in
-                    CangDictTile(
-                        word: testArray[index].word,
-                        root: testArray[index].root,
-                        letter: showRoot ? testArray[index].letter : ""
-                    )
-                    .listRowInsets(EdgeInsets())
-                    .onTapGesture {
-                        // 測試資料庫功能
-                        database.insertSave(data: testArray[index].word)
+                    Button {
+                        // 吸引 Cell 本身的點擊事件
+                    } label: {
+                        CangDictTile(
+                            word: testArray[index].word,
+                            root: testArray[index].root,
+                            letter: showRoot ? testArray[index].letter : "",
+                            isSave: true
+                        )
+                        
                     }
+                    .listRowInsets(EdgeInsets())
+//                    .onTapGesture {
+//                        // 測試資料庫功能
+//                        database.insertSave(data: testArray[index].word)
+//                    }
                 }
                 .padding(.all)
                 .listStyle(.plain)
@@ -60,7 +66,8 @@ struct HomeView: View {
             for each in database.selectAllSaves() {
                 print("儲存的資料 = \(each)")
             }
-        }.onTapGesture {
+        }
+        .onTapGesture {
             UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
         }
     }

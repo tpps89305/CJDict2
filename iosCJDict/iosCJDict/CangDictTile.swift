@@ -12,24 +12,41 @@ struct CangDictTile: View {
     let word: String
     let root: String
     let letter: String
+    @State var isSave: Bool
     
     var body: some View {
         ZStack {
             Rectangle()
                 .fill(Color("Primary"))
-            HStack(alignment: .bottom) {
+            HStack {
                 Text(word)
                     .font(.system(size: 28))
                     .foregroundColor(Color("Title"))
-                HStack {
-                    Text(root)
-                        .foregroundColor(Color("Title"))
-                    Text(letter)
-                        .foregroundColor(Color("Title"))
+                VStack {
+                    Spacer()
+                    HStack(alignment: .bottom) {
+                        Text(root)
+                            .foregroundColor(Color("Title"))
+                        Text(letter)
+                            .foregroundColor(Color("Title"))
+                    }
                 }
                 .padding(.bottom, 2.0)
                 
                 Spacer()
+                Button {
+                    isSave = !isSave
+                } label: {
+                    if isSave {
+                        Image(systemName: "star.fill")
+                            .foregroundColor(.yellow)
+                    } else {
+                        Image(systemName: "star")
+                            .foregroundColor(.yellow)
+                    }
+                }
+                .frame(width: 30, height: 30)
+
             }
             .padding(.all)
         }
@@ -38,7 +55,12 @@ struct CangDictTile: View {
 
 struct CangDictTile_Previews: PreviewProvider {
     static var previews: some View {
-        CangDictTile(word: "安", root: "十女", letter: "JV")
-            .background(Color.gray)
+        CangDictTile(
+            word: "安",
+            root: "十女",
+            letter: "JV",
+            isSave: true)
+        .background(Color.gray)
+        .fixedSize()
     }
 }

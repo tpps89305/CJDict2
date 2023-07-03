@@ -23,10 +23,16 @@ struct ContentView: View {
                 Image(systemName: "iphone.homebutton")
                 Text("主畫面")
             }.tag(1)
+            
+            CollectionsView().tabItem {
+                Image(systemName: "folder")
+                Text("收藏簿")
+            }.tag(2)
+            
             SettingsView().tabItem {
                 Image(systemName: "gearshape")
                 Text("設定")
-            }.tag(2)
+            }.tag(3)
         }
     }
 }

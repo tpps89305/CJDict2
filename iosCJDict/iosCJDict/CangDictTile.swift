@@ -12,7 +12,7 @@ struct CangDictTile: View {
     let word: String
     let root: String
     let letter: String
-    @State var isSave: Bool
+    @Binding var isSave: Bool
     
     var body: some View {
         ZStack {
@@ -35,7 +35,7 @@ struct CangDictTile: View {
                 
                 Spacer()
                 Button {
-                    isSave = !isSave
+                    isSave = true
                 } label: {
                     if isSave {
                         Image(systemName: "star.fill")
@@ -59,7 +59,7 @@ struct CangDictTile_Previews: PreviewProvider {
             word: "安",
             root: "十女",
             letter: "JV",
-            isSave: true)
+            isSave: .constant(true))
         .background(Color.gray)
         .fixedSize()
     }

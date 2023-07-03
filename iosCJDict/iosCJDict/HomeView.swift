@@ -16,6 +16,7 @@ struct HomeView: View {
     @State var testArray: [CangWord] = []
     @State var showRoot = true
     let settings = SettingHandler(context: NSObject())
+    @State var saveArray: [Bool] = []
     
     var body: some View {
         NavigationView {
@@ -24,7 +25,11 @@ struct HomeView: View {
                     .onChange(of: input, perform: { newValue in
                         let array = cangJi5.getCangJiCode(words: newValue) as! [CangWord]
                         if (!array.isEmpty) {
-                            self.testArray = array
+                            testArray = array
+                            saveArray = Array(repeating: false, count: testArray.count)
+                            for i in 0..<testArray.count {
+                                saveArray[i] = database.isDataSaved(dataToCheck: testArray[i].word)
+                            }
                         } else {
                             self.testArray.removeAll()
                         }
@@ -40,15 +45,15 @@ struct HomeView: View {
                             word: testArray[index].word,
                             root: testArray[index].root,
                             letter: showRoot ? testArray[index].letter : "",
-                            isSave: true
-                        )
-                        
+                            isSave: $saveArray[index]
+                        ).onChange(of: saveArray[index]) { newValue in
+                            print("變更後: \(saveArray[index])")
+                            if saveArray[index] == true {
+                                self.database.insertSave(data: testArray[index].word)
+                            }
+                        }
                     }
                     .listRowInsets(EdgeInsets())
-//                    .onTapGesture {
-//                        // 測試資料庫功能
-//                        database.insertSave(data: testArray[index].word)
-//                    }
                 }
                 .padding(.all)
                 .listStyle(.plain)

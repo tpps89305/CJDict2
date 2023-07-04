@@ -18,7 +18,7 @@ class CJDictDatabase(databaseDriverFactory: DatabaseDriverFactory) {
         dbQuery.insertRecent(data)
     }
 
-    fun selectAllSaves(): List<String> {
+    fun selectAllSaves(): List<Save> {
         return dbQuery.selectAllSaves().executeAsList()
     }
 

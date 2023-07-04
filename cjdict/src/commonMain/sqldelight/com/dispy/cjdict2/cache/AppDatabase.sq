@@ -17,7 +17,7 @@ INSERT INTO Recent(data)
 VALUES(?);
 
 selectAllSaves:
-SELECT data FROM Save;
+SELECT * FROM Save;
 
 selectAllRecents:
 SELECT data FROM Recent;

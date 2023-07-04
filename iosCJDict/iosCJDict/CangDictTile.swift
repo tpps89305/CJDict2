@@ -59,7 +59,11 @@ struct CangDictTile: View {
                 
                 Spacer()
                 Button {
-                    isSave = true
+                    if (style == .result) {
+                        isSave = true
+                    } else if (style == .collection) {
+                        isSave = false
+                    }
                 } label: {
                     if isSave {
                         Image(systemName: "star.fill")

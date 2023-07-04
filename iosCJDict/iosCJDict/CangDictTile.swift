@@ -8,27 +8,51 @@
 
 import SwiftUI
 
+enum CangDictTileStyle {
+    case result
+    case collection
+    
+    var background: Color {
+        switch self {
+        case .result:
+            return Color("Primary")
+        case .collection:
+            return .white
+        }
+    }
+    
+    var textColor: Color {
+        switch self {
+        case .result:
+            return Color("Title")
+        case .collection:
+            return Color("Text")
+        }
+    }
+}
+
 struct CangDictTile: View {
     let word: String
     let root: String
     let letter: String
     @Binding var isSave: Bool
+    let style: CangDictTileStyle
     
     var body: some View {
         ZStack {
             Rectangle()
-                .fill(Color("Primary"))
+                .fill(style.background)
             HStack {
                 Text(word)
                     .font(.system(size: 28))
-                    .foregroundColor(Color("Title"))
+                    .foregroundColor(style.textColor)
                 VStack {
                     Spacer()
                     HStack(alignment: .bottom) {
                         Text(root)
-                            .foregroundColor(Color("Title"))
+                            .foregroundColor(style.textColor)
                         Text(letter)
-                            .foregroundColor(Color("Title"))
+                            .foregroundColor(style.textColor)
                     }
                 }
                 .padding(.bottom, 2.0)
@@ -59,7 +83,8 @@ struct CangDictTile_Previews: PreviewProvider {
             word: "安",
             root: "十女",
             letter: "JV",
-            isSave: .constant(true))
+            isSave: .constant(true),
+            style: .result)
         .background(Color.gray)
         .fixedSize()
     }

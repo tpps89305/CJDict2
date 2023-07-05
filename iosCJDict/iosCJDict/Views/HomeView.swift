@@ -11,16 +11,16 @@ import cjdict
 
 struct HomeView: View {
     
-    @State var input = ""
     var cangJi5 = CangJi5Dict()
     let database = CJDictDatabase(databaseDriverFactory: DatabaseDriverFactory())
     @State private var resultArray: [ResultListItem] = []
+    @EnvironmentObject var prospects: Prospects
     
     var body: some View {
         NavigationView {
             VStack(spacing: 0.0) {
-                SearchField(input: $input)
-                    .onChange(of: input, perform: { newValue in
+                SearchField(input: $prospects.input)
+                    .onChange(of: prospects.input, perform: { newValue in
                         let array = cangJi5.getCangJiCode(words: newValue) as! [CangWord]
                         if (!array.isEmpty) {
                             resultArray.removeAll()
@@ -32,14 +32,21 @@ struct HomeView: View {
                             self.resultArray.removeAll()
                         }
                     })
-                Rectangle()
-                    .fill(Color.gray)
-                    .frame(height: 1.0)
                 ResultField(resultArray: $resultArray)
             }
             
             .navigationTitle("倉頡字典")
             .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem {
+                    Button {
+                        // TODO: 前往最近查詢頁
+                    } label: {
+                        Image(systemName: "clock.arrow.circlepath")
+                            .foregroundColor(Color.white)
+                    }
+                }
+            }
         }
         .onTapGesture {
             UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
@@ -48,8 +55,12 @@ struct HomeView: View {
 }
 
 struct HomeView_Previews: PreviewProvider {
+    
+    @StateObject static var prospects = Prospects()
+    
     static var previews: some View {
         HomeView()
+            .environmentObject(prospects)
     }
 }
 
@@ -60,16 +71,17 @@ private struct SearchField: View {
     var body: some View {
         HStack {
             TextField("輸入欲查詢的字", text: $input)
+                .font(.system(size: 24))
                 .padding(16.0)
             
             if (!input.isEmpty) {
                 Button {
                     input = ""
                 } label: {
-                    Image(systemName: "xmark.circle.fill")
+                    Image(systemName: "xmark")
                         .resizable()
                         .foregroundColor(Color.gray)
-                        .frame(width: 25.0, height: 25.0)
+                        .frame(width: 20.0, height: 20.0)
                 }
                 .padding(.trailing, 20.0)
             }
@@ -115,7 +127,9 @@ private struct ResultField: View {
 
 struct ResultField_Previews: PreviewProvider {
     
-    static var test = ResultListItem(isSave: false, cangWord: CangWord(word: "安", root: "十女", letter: "JV"))
+    static var test = ResultListItem(
+        isSave: false,
+        cangWord: CangWord(word: "安", root: "十女", letter: "JV"))
     
     static var previews: some View {
         ResultField(resultArray: .constant([test, test]))

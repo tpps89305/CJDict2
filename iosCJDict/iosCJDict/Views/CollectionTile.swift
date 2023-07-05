@@ -32,13 +32,15 @@ struct CollectionTile: View {
                 
                 Spacer()
                 Button {
-                    isSave = false
+                    isSave.toggle()
                 } label: {
                     if isSave {
                         Image(systemName: "star.fill")
+                            .resizable()
                             .foregroundColor(.yellow)
                     } else {
                         Image(systemName: "star")
+                            .resizable()
                             .foregroundColor(.yellow)
                     }
                 }
@@ -58,5 +60,6 @@ struct CollectionTile_Previews: PreviewProvider {
             root: "十女",
             letter: "JV",
             isSave: .constant(true))
+        .fixedSize()
     }
 }

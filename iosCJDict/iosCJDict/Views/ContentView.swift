@@ -2,6 +2,9 @@ import SwiftUI
 import cjdict
 
 struct ContentView: View {
+    
+    @StateObject var prospects = Prospects()
+    
     init() {
         let coloredAppearance = UINavigationBarAppearance()
         coloredAppearance.backgroundColor = UIColor(named: "Primary")
@@ -18,7 +21,7 @@ struct ContentView: View {
     }
 
     var body: some View {
-        TabView {
+        TabView(selection: $prospects.tabSelection) {
             HomeView().tabItem {
                 Image(systemName: "iphone.homebutton")
                 Text("主畫面")
@@ -34,6 +37,7 @@ struct ContentView: View {
                 Text("設定")
             }.tag(3)
         }
+        .environmentObject(prospects)
     }
 }
 

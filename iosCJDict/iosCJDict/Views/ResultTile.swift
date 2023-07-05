@@ -39,13 +39,15 @@ struct ResultTile: View {
                 } label: {
                     if isSave {
                         Image(systemName: "star.fill")
+                            .resizable()
                             .foregroundColor(.yellow)
                     } else {
                         Image(systemName: "star")
+                            .resizable()
                             .foregroundColor(.yellow)
                     }
                 }
-                .frame(width: 30, height: 30)
+                .frame(width: 25.0, height: 25.0)
 
             }
             .padding(.all)

@@ -10,8 +10,10 @@ import SwiftUI
 import cjdict
 
 struct CollectionsView: View {
-    let database = CJDictDatabase(databaseDriverFactory: DatabaseDriverFactory())
     @State var resultArray: [CollectionListItem] = []
+    @EnvironmentObject var prospects: Prospects
+    
+    let database = CJDictDatabase(databaseDriverFactory: DatabaseDriverFactory())
     var perviewMode = false
     
     var body: some View {
@@ -27,12 +29,16 @@ struct CollectionsView: View {
                                 root: "",
                                 letter: "",
                                 isSave: $each.isSave)
-                                    .onChange(of: each.isSave) { newValue in
-                                print("將刪除 id = \(each.cangData._id) 的資料")
-                                database.deleteSaveById(id: each.cangData._id)
-                                resultArray.removeAll { item in
-                                    item.uuid == each.uuid
+                            .onChange(of: each.isSave) { newValue in
+                                if newValue == false {
+                                    print("將刪除 id = \(each.cangData._id) 的資料")
+                                    database.deleteSaveById(id: each.cangData._id)
+                                } else {
+                                    database.insertSave(data: each.cangData.data_)
                                 }
+                            }.onTapGesture {
+                                prospects.tabSelection = 0
+                                prospects.input = each.cangData.data_
                             }
                         }
                     }
@@ -54,6 +60,7 @@ struct CollectionsView: View {
 }
 
 struct CollectionsView_Previews: PreviewProvider {
+    @StateObject var prospects = Prospects()
     static var words = [CollectionListItem(isSave: true, cangData: Save(_id: 87, data_: "我"))]
     
     static var previews: some View {

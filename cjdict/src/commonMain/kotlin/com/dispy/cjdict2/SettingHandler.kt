@@ -31,11 +31,11 @@ class SettingHandler(private val context: SPref) {
         return context.getInt(SettingHandlerTag.TAG_RECENT_AMOUNT)
     }
 
-    fun setTheme(value: String) {
-        context.setString(SettingHandlerTag.TAG_THEME, value)
+    fun setTheme(value: Int) {
+        context.setInt(SettingHandlerTag.TAG_THEME, value)
     }
 
-    fun getTheme(): String {
-        return context.getString(SettingHandlerTag.TAG_THEME)
+    fun getTheme(): Int {
+        return context.getInt(SettingHandlerTag.TAG_THEME)
     }
 }

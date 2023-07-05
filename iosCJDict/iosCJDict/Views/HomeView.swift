@@ -104,7 +104,7 @@ private struct ResultField: View {
                     ResultTile(
                         word: each.cangWord.word,
                         root: each.cangWord.root,
-                        letter: each.cangWord.letter,
+                        letter: settings.getShowRoot() ? each.cangWord.letter : "",
                         isSave: $each.isSave)
                     .onChange(of: each.isSave) { newValue in
                         if each.isSave == true {
@@ -126,6 +126,7 @@ private struct ResultField: View {
 }
 
 struct ResultField_Previews: PreviewProvider {
+    @StateObject var prospects = Prospects()
     
     static var test = ResultListItem(
         isSave: false,

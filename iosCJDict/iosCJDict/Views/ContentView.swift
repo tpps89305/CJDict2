@@ -4,6 +4,7 @@ import cjdict
 struct ContentView: View {
     
     @StateObject var prospects = Prospects()
+    let settings = SettingHandler(context: NSObject())
     
     init() {
         let coloredAppearance = UINavigationBarAppearance()
@@ -38,6 +39,19 @@ struct ContentView: View {
             }.tag(3)
         }
         .environmentObject(prospects)
+        .preferredColorScheme(prospects.isPreferrScheme ? prospects.theme : .none)
+        .onAppear {
+            switch settings.getTheme() {
+            case 1:
+                prospects.isPreferrScheme = true
+                prospects.theme = .light
+            case 2:
+                prospects.isPreferrScheme = true
+                prospects.theme = .dark
+            default:
+                prospects.isPreferrScheme = false
+            }
+        }
     }
 }
 

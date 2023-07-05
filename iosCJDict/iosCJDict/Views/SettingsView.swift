@@ -23,14 +23,10 @@ struct SettingsView: View {
                     .onChange(of: isShowKey) { newValue in
                         settings.setShowRoot(value: isShowKey)
                     }
-                    SetApperanceButton { themeTag in
-                        settings.setTheme(value: themeTag)
-                    }
+                    SetApperanceButton()
                 }
                 Section(header: Text("記錄設定")) {
-                    SetAmountButton { recentAmount in
-                        settings.setRecentAmount(value: Int32(recentAmount))
-                    }
+                    SetAmountButton()
                     
                     DeleteRecordButton()
                 }
@@ -48,6 +44,7 @@ struct SettingsView: View {
 }
 
 struct SettingsView_Previews: PreviewProvider {
+    @StateObject var prospects = Prospects()
     static var previews: some View {
         SettingsView()
     }
@@ -55,8 +52,10 @@ struct SettingsView_Previews: PreviewProvider {
 
 private struct SetApperanceButton: View {
     
+    let settings = SettingHandler(context: NSObject())
     @State var isShowApperanceDialog = false
-    var response: ((_ themeTag: String) -> Void)
+    @EnvironmentObject var prospects: Prospects
+    @State var themeName = "一般"
     
     var body: some View {
         Button {
@@ -66,22 +65,41 @@ private struct SetApperanceButton: View {
                 Text("顯示模式")
                     .foregroundColor(Color("Text"))
                 Spacer()
-                Text("一般")
+                Text(themeName)
                     .foregroundColor(Color.gray)
             }
         }
         .actionSheet(isPresented: $isShowApperanceDialog) {
             ActionSheet(title: Text("顯示模式"), buttons: [
                 .default(Text("一般")) {
-                    response("一般")
+                    settings.setTheme(value: 1)
+                    prospects.isPreferrScheme = true
+                    prospects.theme = .light
+                    themeName = "一般"
                 },
                 .default(Text("暗色")) {
-                    response("暗色")
+                    settings.setTheme(value: 2)
+                    prospects.isPreferrScheme = true
+                    prospects.theme = .dark
+                    themeName = "暗色"
                 },
                 .default(Text("比照系統設定")) {
-                    response("比照系統設定")
+                    settings.setTheme(value: 3)
+                    prospects.isPreferrScheme = true
+                    prospects.theme = .light
+                    themeName = "比照系統設定"
                 }
             ])
+        }
+        .onAppear {
+            switch settings.getTheme() {
+            case 1:
+                themeName = "一般"
+            case 2:
+                themeName = "暗色"
+            default:
+                themeName = "比照系統設定"
+            }
         }
     }
 }
@@ -89,7 +107,9 @@ private struct SetApperanceButton: View {
 private struct SetAmountButton: View {
     
     @State var isShowAmountDialog = false
-    var response: ((_ recentAmount: Int) -> Void)
+    @State var recentAmount = 0
+    
+    let settings = SettingHandler(context: NSObject())
     
     var body: some View {
         Button {
@@ -99,26 +119,33 @@ private struct SetAmountButton: View {
                 Text("最近查詢數量")
                     .foregroundColor(Color("Text"))
                 Spacer()
-                Text("87")
+                Text("\(recentAmount)")
                     .foregroundColor(Color.gray)
+            }.onAppear {
+                recentAmount = Int(settings.getRecentAmount())
             }
         }
         .actionSheet(isPresented: $isShowAmountDialog) {
             ActionSheet(title: Text("最近查詢數量"), buttons: [
                 .default(Text("10")) {
-                    response(10)
+                    recentAmount = 10
+                    settings.setRecentAmount(value: 10)
                 },
                 .default(Text("30")) {
-                    response(30)
+                    recentAmount = 30
+                    settings.setRecentAmount(value: 30)
                 },
                 .default(Text("50")) {
-                    response(50)
+                    recentAmount = 50
+                    settings.setRecentAmount(value: 50)
                 },
                 .default(Text("70")) {
-                    response(70)
+                    recentAmount = 70
+                    settings.setRecentAmount(value: 70)
                 },
                 .default(Text("100")) {
-                    response(100)
+                    recentAmount = 100
+                    settings.setRecentAmount(value: 100)
                 }
             ])
         }

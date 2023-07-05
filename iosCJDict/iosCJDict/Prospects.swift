@@ -7,13 +7,12 @@
 //
 
 import Foundation
+import SwiftUI
 
 @MainActor class Prospects: ObservableObject {
-    @Published var tabSelection: Int
-    @Published var input: String
+    @Published var tabSelection: Int = 0
+    @Published var input: String = ""
+    @Published var isPreferrScheme: Bool = false
+    @Published var theme: ColorScheme = .light
     
-    init() {
-        tabSelection = 0
-        input = ""
-    }
 }

@@ -17,7 +17,7 @@ struct CollectionTile: View {
     var body: some View {
         ZStack {
             Rectangle()
-                .fill(.white)
+                .fill(Color("TileBackground"))
             HStack {
                 Text(word)
                     .font(.system(size: 28))

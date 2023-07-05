@@ -89,12 +89,11 @@ private struct ResultField: View {
         ScrollView {
             VStack {
                 ForEach($resultArray) { $each in
-                    CangDictTile(
+                    ResultTile(
                         word: each.cangWord.word,
                         root: each.cangWord.root,
                         letter: each.cangWord.letter,
-                        isSave: $each.isSave,
-                        style: .result)
+                        isSave: $each.isSave)
                     .onChange(of: each.isSave) { newValue in
                         if each.isSave == true {
                             self.database.insertSave(data: each.cangWord.word)
@@ -102,7 +101,7 @@ private struct ResultField: View {
                     }
                 }
             }
-            .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+            .padding(.all)
         }
         .onAppear {
             // 測試資料庫功能

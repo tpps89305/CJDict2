@@ -22,13 +22,12 @@ struct CollectionsView: View {
                 ScrollView {
                     VStack {
                         ForEach($resultArray) { $each in
-                            CangDictTile(
+                            CollectionTile(
                                 word: each.cangData.data_,
                                 root: "",
                                 letter: "",
-                                isSave: $each.isSave,
-                                style: .collection)
-                            .onChange(of: each.isSave) { newValue in
+                                isSave: $each.isSave)
+                                    .onChange(of: each.isSave) { newValue in
                                 print("將刪除 id = \(each.cangData._id) 的資料")
                                 database.deleteSaveById(id: each.cangData._id)
                                 resultArray.removeAll { item in

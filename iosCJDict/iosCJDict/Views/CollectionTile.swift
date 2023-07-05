@@ -1,69 +1,38 @@
 //
-//  CangDictTile.swift
+//  CollectionTile.swift
 //  iosCJDict
 //
-//  Created by 楊朝富 on 2023/4/17.
-//  Copyright © 2023 orgName. All rights reserved.
+//  Created by 楊朝富 on 2023/7/5.
+//  Copyright © 2023 Dispy. All rights reserved.
 //
 
 import SwiftUI
 
-enum CangDictTileStyle {
-    case result
-    case collection
-    
-    var background: Color {
-        switch self {
-        case .result:
-            return Color("Primary")
-        case .collection:
-            return .white
-        }
-    }
-    
-    var textColor: Color {
-        switch self {
-        case .result:
-            return Color("Title")
-        case .collection:
-            return Color("Text")
-        }
-    }
-}
-
-struct CangDictTile: View {
+struct CollectionTile: View {
     let word: String
     let root: String
     let letter: String
     @Binding var isSave: Bool
-    let style: CangDictTileStyle
     
     var body: some View {
         ZStack {
             Rectangle()
-                .fill(style.background)
+                .fill(.white)
             HStack {
                 Text(word)
                     .font(.system(size: 28))
-                    .foregroundColor(style.textColor)
                 VStack {
                     Spacer()
                     HStack(alignment: .bottom) {
                         Text(root)
-                            .foregroundColor(style.textColor)
                         Text(letter)
-                            .foregroundColor(style.textColor)
                     }
                 }
                 .padding(.bottom, 2.0)
                 
                 Spacer()
                 Button {
-                    if (style == .result) {
-                        isSave = true
-                    } else if (style == .collection) {
-                        isSave = false
-                    }
+                    isSave = false
                 } label: {
                     if isSave {
                         Image(systemName: "star.fill")
@@ -82,15 +51,12 @@ struct CangDictTile: View {
     }
 }
 
-struct CangDictTile_Previews: PreviewProvider {
+struct CollectionTile_Previews: PreviewProvider {
     static var previews: some View {
-        CangDictTile(
+        CollectionTile(
             word: "安",
             root: "十女",
             letter: "JV",
-            isSave: .constant(true),
-            style: .result)
-        .background(Color.gray)
-        .fixedSize()
+            isSave: .constant(true))
     }
 }

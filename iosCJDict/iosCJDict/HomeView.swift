@@ -14,10 +14,7 @@ struct HomeView: View {
     @State var input = ""
     var cangJi5 = CangJi5Dict()
     let database = CJDictDatabase(databaseDriverFactory: DatabaseDriverFactory())
-    @State var resultArray: [CangWord] = []
-    @State var showRoot = true
-    let settings = SettingHandler(context: NSObject())
-    @State var saveArray: [Bool] = []
+    @State private var resultArray: [ResultListItem] = []
     
     var body: some View {
         NavigationView {
@@ -26,10 +23,10 @@ struct HomeView: View {
                     .onChange(of: input, perform: { newValue in
                         let array = cangJi5.getCangJiCode(words: newValue) as! [CangWord]
                         if (!array.isEmpty) {
-                            resultArray = array
-                            saveArray = Array(repeating: false, count: resultArray.count)
-                            for i in 0..<resultArray.count {
-                                saveArray[i] = database.isDataSaved(dataToCheck: resultArray[i].word)
+                            resultArray.removeAll()
+                            for each in array {
+                                let isSave = database.isDataSaved(dataToCheck: each.word)
+                                resultArray.append(ResultListItem(isSave: isSave, cangWord: each))
                             }
                         } else {
                             self.resultArray.removeAll()
@@ -38,38 +35,11 @@ struct HomeView: View {
                 Rectangle()
                     .fill(Color.gray)
                     .frame(height: 1.0)
-                List(resultArray.indices, id: \.self) { index in
-                    Button {
-                        // 吸引 Cell 本身的點擊事件
-                    } label: {
-                        CangDictTile(
-                            word: resultArray[index].word,
-                            root: resultArray[index].root,
-                            letter: showRoot ? resultArray[index].letter : "",
-                            isSave: $saveArray[index],
-                            style: .result
-                        ).onChange(of: saveArray[index]) { newValue in
-                            print("變更後: \(saveArray[index])")
-                            if saveArray[index] == true {
-                                self.database.insertSave(data: resultArray[index].word)
-                            }
-                        }
-                    }
-                    .listRowInsets(EdgeInsets())
-                }
-                .padding(.all)
-                .listStyle(.plain)
-                Spacer()
+                ResultField(resultArray: $resultArray)
             }
             
             .navigationTitle("倉頡字典")
             .navigationBarTitleDisplayMode(.inline)
-        }
-        .onAppear {
-            // 測試資料庫功能
-            showRoot = settings.getShowRoot()
-            print("最近查詢數量：\(settings.getRecentAmount())")
-            print("套用主題：\(settings.getTheme())")
         }
         .onTapGesture {
             UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
@@ -104,5 +74,51 @@ private struct SearchField: View {
                 .padding(.trailing, 20.0)
             }
         }
+    }
+}
+
+private struct ResultField: View {
+    
+    let database = CJDictDatabase(databaseDriverFactory: DatabaseDriverFactory())
+    let settings = SettingHandler(context: NSObject())
+    
+    @Binding var resultArray: [ResultListItem]
+    @State var showRoot = true
+    
+    var body: some View {
+        ScrollView {
+            VStack {
+                ForEach($resultArray) { $each in
+                    CangDictTile(
+                        word: each.cangWord.word,
+                        root: each.cangWord.root,
+                        letter: each.cangWord.letter,
+                        isSave: $each.isSave,
+                        style: .result)
+                    .onChange(of: each.isSave) { newValue in
+                        if each.isSave == true {
+                            self.database.insertSave(data: each.cangWord.word)
+                        }
+                    }
+                }
+            }
+            .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+        }
+        .onAppear {
+            // 測試資料庫功能
+            showRoot = settings.getShowRoot()
+            print("最近查詢數量：\(settings.getRecentAmount())")
+            print("套用主題：\(settings.getTheme())")
+        }
+    }
+    
+}
+
+struct ResultField_Previews: PreviewProvider {
+    
+    static var test = ResultListItem(isSave: false, cangWord: CangWord(word: "安", root: "十女", letter: "JV"))
+    
+    static var previews: some View {
+        ResultField(resultArray: .constant([test, test]))
     }
 }

@@ -78,6 +78,7 @@ struct CangDictTile: View {
             }
             .padding(.all)
         }
+        .cornerRadius(10)
     }
 }
 

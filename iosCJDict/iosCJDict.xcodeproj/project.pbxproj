@@ -88,17 +88,12 @@
 		7555FF7D242A565900829871 /* iosCJDict */ = {
 			isa = PBXGroup;
 			children = (
+				F6F9922A2A550BEC00D05FB7 /* Views */,
+				F6F992292A550BB900D05FB7 /* Entities */,
 				058557BA273AAA24004C7B11 /* Assets.xcassets */,
-				7555FF82242A565900829871 /* ContentView.swift */,
-				F64308D529ED3BCD000585DB /* CangDictTile.swift */,
 				7555FF8C242A565B00829871 /* Info.plist */,
 				2152FB032600AC8F00CF470E /* iOSApp.swift */,
 				058557D7273AAEEB004C7B11 /* Preview Content */,
-				F66745FC29EE3DE70085774B /* HomeView.swift */,
-				F66745FE29EE3F450085774B /* SettingsView.swift */,
-				F642152B2A27505300710122 /* CollectionsView.swift */,
-				F605FC962A540995002E1284 /* CollectionListItem.swift */,
-				F605FC982A542786002E1284 /* ResultListItem.swift */,
 			);
 			path = iosCJDict;
 			sourceTree = "<group>";
@@ -109,6 +104,27 @@
 				823E01FC461BD183FB9324B3 /* Pods_iosCJDict.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F6F992292A550BB900D05FB7 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				F605FC962A540995002E1284 /* CollectionListItem.swift */,
+				F605FC982A542786002E1284 /* ResultListItem.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		F6F9922A2A550BEC00D05FB7 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F64308D529ED3BCD000585DB /* CangDictTile.swift */,
+				F642152B2A27505300710122 /* CollectionsView.swift */,
+				7555FF82242A565900829871 /* ContentView.swift */,
+				F66745FC29EE3DE70085774B /* HomeView.swift */,
+				F66745FE29EE3F450085774B /* SettingsView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

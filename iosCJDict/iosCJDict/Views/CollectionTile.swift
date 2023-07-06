@@ -61,5 +61,6 @@ struct CollectionTile_Previews: PreviewProvider {
             letter: "JV",
             isSave: .constant(true))
         .fixedSize()
+        .previewLayout(.sizeThatFits)
     }
 }

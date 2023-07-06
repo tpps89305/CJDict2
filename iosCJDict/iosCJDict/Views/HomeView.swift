@@ -16,21 +16,25 @@ struct HomeView: View {
     @State private var resultArray: [ResultListItem] = []
     @EnvironmentObject var prospects: Prospects
     
+    private func search(words: String) {
+        let array = cangJi5.getCangJiCode(words: words) as! [CangWord]
+        if (!array.isEmpty) {
+            resultArray.removeAll()
+            for each in array {
+                let isSave = database.isDataSaved(dataToCheck: each.word)
+                resultArray.append(ResultListItem(isSave: isSave, cangWord: each))
+            }
+        } else {
+            self.resultArray.removeAll()
+        }
+    }
+    
     var body: some View {
         NavigationView {
             VStack(spacing: 0.0) {
                 SearchField(input: $prospects.input)
                     .onChange(of: prospects.input, perform: { newValue in
-                        let array = cangJi5.getCangJiCode(words: newValue) as! [CangWord]
-                        if (!array.isEmpty) {
-                            resultArray.removeAll()
-                            for each in array {
-                                let isSave = database.isDataSaved(dataToCheck: each.word)
-                                resultArray.append(ResultListItem(isSave: isSave, cangWord: each))
-                            }
-                        } else {
-                            self.resultArray.removeAll()
-                        }
+                        search(words: newValue)
                     })
                 ResultField(resultArray: $resultArray)
             }

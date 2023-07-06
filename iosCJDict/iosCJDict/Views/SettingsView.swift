@@ -166,7 +166,7 @@ private struct DeleteRecordButton: View {
         .actionSheet(isPresented: $isShowAboutDialog) {
             ActionSheet(title: Text("是否要清除查詢紀錄"), buttons: [
                 .destructive(Text("確認")) {
-                    
+                    // TODO: 刪除最近查詢紀錄
                 },
                 .cancel(Text("取消"))
             ])

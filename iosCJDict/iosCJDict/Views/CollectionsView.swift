@@ -16,6 +16,15 @@ struct CollectionsView: View {
     let database = CJDictDatabase(databaseDriverFactory: DatabaseDriverFactory())
     var perviewMode = false
     
+    private func manageCollection(state: Bool, cangData: Save) {
+        if state == false {
+            print("將刪除 id = \(cangData._id) 的資料")
+            database.deleteSaveById(id: cangData._id)
+        } else {
+            database.insertSave(data: cangData.data_)
+        }
+    }
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -30,12 +39,7 @@ struct CollectionsView: View {
                                 letter: "",
                                 isSave: $each.isSave)
                             .onChange(of: each.isSave) { newValue in
-                                if newValue == false {
-                                    print("將刪除 id = \(each.cangData._id) 的資料")
-                                    database.deleteSaveById(id: each.cangData._id)
-                                } else {
-                                    database.insertSave(data: each.cangData.data_)
-                                }
+                                manageCollection(state: newValue, cangData: each.cangData)
                             }.onTapGesture {
                                 prospects.tabSelection = 0
                                 prospects.input = each.cangData.data_

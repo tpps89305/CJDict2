@@ -63,7 +63,7 @@ struct ResultTile_Previews: PreviewProvider {
             root: "十女",
             letter: "JV",
             isSave: .constant(true))
-        .background(Color.gray)
         .fixedSize()
+        .previewLayout(.sizeThatFits)
     }
 }

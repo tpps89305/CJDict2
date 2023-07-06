@@ -45,10 +45,15 @@ class CJDictDatabase(databaseDriverFactory: DatabaseDriverFactory) {
 
     fun deleteOldRecents(amountRecent: Int) {
         val lastId = getLastInsertId() - amountRecent
-        dbQuery.deleteRecentsLessThenId(lastId)
+        if (lastId > 0)
+            dbQuery.deleteRecentsLessThenId(lastId)
     }
 
     fun getLastInsertId(): Long {
-        return dbQuery.selectAllRecents().executeAsList().last()._id
+        val recent = dbQuery.selectAllRecents().executeAsList()
+        if (recent.isEmpty()) {
+            return 0
+        }
+        return recent.last()._id
     }
 }

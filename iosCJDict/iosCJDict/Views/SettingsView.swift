@@ -155,6 +155,7 @@ private struct SetAmountButton: View {
 private struct DeleteRecordButton: View {
     
     @State var isShowAboutDialog = false
+    let database = CJDictDatabase(databaseDriverFactory: DatabaseDriverFactory())
     
     var body: some View {
         Button {
@@ -166,7 +167,7 @@ private struct DeleteRecordButton: View {
         .actionSheet(isPresented: $isShowAboutDialog) {
             ActionSheet(title: Text("是否要清除查詢紀錄"), buttons: [
                 .destructive(Text("確認")) {
-                    // TODO: 刪除最近查詢紀錄
+                    database.removeAllRecents()
                 },
                 .cancel(Text("取消"))
             ])

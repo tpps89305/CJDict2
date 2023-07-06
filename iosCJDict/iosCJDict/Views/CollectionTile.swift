@@ -44,7 +44,7 @@ struct CollectionTile: View {
                             .foregroundColor(.yellow)
                     }
                 }
-                .frame(width: 30, height: 30)
+                .frame(width: 25, height: 25)
 
             }
             .padding(.all)

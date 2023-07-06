@@ -13,8 +13,10 @@ struct HomeView: View {
     
     var cangJi5 = CangJi5Dict()
     let database = CJDictDatabase(databaseDriverFactory: DatabaseDriverFactory())
+    let settings = SettingHandler(context: NSObject())
     @State private var resultArray: [ResultListItem] = []
     @EnvironmentObject var prospects: Prospects
+    @State private var showRecents = false
     
     private func search(words: String) {
         let array = cangJi5.getCangJiCode(words: words) as! [CangWord]
@@ -24,6 +26,11 @@ struct HomeView: View {
                 let isSave = database.isDataSaved(dataToCheck: each.word)
                 resultArray.append(ResultListItem(isSave: isSave, cangWord: each))
             }
+            if prospects.saveToRecent {
+                database.insertRecent(data: prospects.input)
+            }
+            // 恢復為原本的狀態
+            prospects.saveToRecent = true
         } else {
             self.resultArray.removeAll()
         }
@@ -44,12 +51,15 @@ struct HomeView: View {
             .toolbar {
                 ToolbarItem {
                     Button {
-                        // TODO: 前往最近查詢頁
+                        showRecents = true
                     } label: {
                         Image(systemName: "clock.arrow.circlepath")
                             .foregroundColor(Color.white)
                     }
                 }
+            }
+            .sheet(isPresented: $showRecents) {
+                RecentsView()
             }
         }
         .onTapGesture {
@@ -120,10 +130,7 @@ private struct ResultField: View {
             .padding(.all)
         }
         .onAppear {
-            // 測試資料庫功能
             showRoot = settings.getShowRoot()
-            print("最近查詢數量：\(settings.getRecentAmount())")
-            print("套用主題：\(settings.getTheme())")
         }
     }
     

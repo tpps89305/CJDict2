@@ -14,5 +14,5 @@ import SwiftUI
     @Published var input: String = ""
     @Published var isPreferrScheme: Bool = false
     @Published var theme: ColorScheme = .light
-    
+    @Published var saveToRecent = true
 }

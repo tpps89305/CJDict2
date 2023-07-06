@@ -20,7 +20,7 @@ selectAllSaves:
 SELECT * FROM Save;
 
 selectAllRecents:
-SELECT data FROM Recent;
+SELECT * FROM Recent;
 
 selectSaveByData:
 SELECT * FROM Save WHERE data = ?;
@@ -36,3 +36,6 @@ DELETE FROM Save WHERE _id = ?;
 
 deleteRecentsLessThenId:
 DELETE FROM Recent WHERE _id <= ?;
+
+getLastInsertId:
+SELECT last_insert_rowid();

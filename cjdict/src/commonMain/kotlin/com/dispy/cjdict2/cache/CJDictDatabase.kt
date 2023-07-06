@@ -23,7 +23,7 @@ class CJDictDatabase(databaseDriverFactory: DatabaseDriverFactory) {
     }
 
     fun selectAllRecents(): List<String> {
-        return dbQuery.selectAllRecents().executeAsList()
+        return dbQuery.selectAllRecents().executeAsList().map { cangWord -> cangWord.data_ }
     }
 
     fun isDataSaved(dataToCheck: String): Boolean {
@@ -43,7 +43,12 @@ class CJDictDatabase(databaseDriverFactory: DatabaseDriverFactory) {
         dbQuery.deleteSaveById(id)
     }
 
-    fun deleteRecentsLessThenId(id: Long) {
-        dbQuery.deleteRecentsLessThenId(id)
+    fun deleteOldRecents(amountRecent: Int) {
+        val lastId = getLastInsertId() - amountRecent
+        dbQuery.deleteRecentsLessThenId(lastId)
+    }
+
+    fun getLastInsertId(): Long {
+        return dbQuery.selectAllRecents().executeAsList().last()._id
     }
 }

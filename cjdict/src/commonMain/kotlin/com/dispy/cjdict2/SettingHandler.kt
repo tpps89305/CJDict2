@@ -28,7 +28,11 @@ class SettingHandler(private val context: SPref) {
     }
 
     fun getRecentAmount(): Int {
-        return context.getInt(SettingHandlerTag.TAG_RECENT_AMOUNT)
+        val recent = context.getInt(SettingHandlerTag.TAG_RECENT_AMOUNT)
+        if (recent <= 0) {
+            return 10
+        }
+        return recent
     }
 
     fun setTheme(value: Int) {

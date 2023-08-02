@@ -11,6 +11,7 @@ import cjdict
 
 struct SettingsView: View {
     @State var isShowKey = false
+    
     let settings = SettingHandler(context: NSObject())
     
     var body: some View {
@@ -25,10 +26,12 @@ struct SettingsView: View {
                     }
                     SetApperanceButton()
                 }
-                Section(header: Text("記錄設定")) {
+                Section(header: Text("查詢設定")) {
                     SetAmountButton()
                     
                     DeleteRecordButton()
+                    
+                    FileHandleButton()
                 }
                 Section(header: Text("其他")) {
                     AboutButton()
@@ -191,6 +194,23 @@ private struct AboutButton: View {
                 title: Text("倉頡字典"),
                 message: Text("版本：1.0.0\n2023 年 4 月 18 日")
             )
+        }
+    }
+}
+
+struct FileHandleButton: View {
+    
+    @State private var presentFileHandleView = false
+    
+    var body: some View {
+        Button {
+            presentFileHandleView = true
+        } label: {
+            Text("匯入或匯出查詢紀錄")
+                .foregroundColor(Color("Text"))
+        }
+        .sheet(isPresented: $presentFileHandleView) {
+            FileHandleView()
         }
     }
 }

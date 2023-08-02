@@ -12,7 +12,6 @@ import cjdict
 struct CollectionsView: View {
     @State var resultArray: [CollectionListItem] = []
     @EnvironmentObject var prospects: Prospects
-    @State private var presentFileHandleView = false
     
     let database = CJDictDatabase(databaseDriverFactory: DatabaseDriverFactory())
     var perviewMode = false
@@ -51,19 +50,6 @@ struct CollectionsView: View {
                 }
                 
                 .navigationTitle("收藏簿")
-                .toolbar {
-                    ToolbarItem {
-                        Button {
-                            presentFileHandleView = true
-                        } label: {
-                            Image(systemName: "tray.and.arrow.down.fill")
-                                .foregroundColor(Color.white)
-                        }
-                    }
-                }
-                .sheet(isPresented: $presentFileHandleView) {
-                    FileHandleView()
-                }
             }
         }
         .onAppear {

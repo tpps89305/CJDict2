@@ -61,6 +61,7 @@ struct HomeView: View {
             .sheet(isPresented: $showRecents) {
                 RecentsView()
             }
+            .background(Color("Background"))
         }
         .onTapGesture {
             UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
@@ -100,6 +101,7 @@ private struct SearchField: View {
                 .padding(.trailing, 20.0)
             }
         }
+        .background(Color("TileBackground"))
     }
 }
 

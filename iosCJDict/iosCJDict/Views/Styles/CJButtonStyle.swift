@@ -15,7 +15,7 @@ struct CJButtonStyle: ButtonStyle {
         configuration.label
             .frame(minWidth: 0, maxWidth: .infinity)
             .padding()
-            .foregroundColor(.white)
+            .foregroundColor(Color("Title"))
             .background(Color("Primary"))
             .cornerRadius(10)
     }

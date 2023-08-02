@@ -20,6 +20,10 @@ struct CSVFile: FileDocument {
         text = initialText
     }
     
+    init(initialArray: [String]) {
+        text = initialArray.joined(separator: ",")
+    }
+    
     init(configuration: ReadConfiguration) throws {
         if let data = configuration.file.regularFileContents {
             text = String(decoding: data, as: UTF8.self)

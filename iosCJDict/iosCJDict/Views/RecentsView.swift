@@ -21,23 +21,7 @@ struct RecentsView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            HStack {
-                Button {
-                    presentationMode.wrappedValue.dismiss()
-                } label: {
-                    Image(systemName: "xmark.circle.fill")
-                        .resizable()
-                        .foregroundColor(Color.gray)
-                        .frame(width: 25.0, height: 25.0)
-                }
-                Spacer()
-                Text("最近查詢")
-                Spacer()
-                Rectangle()
-                    .foregroundColor(.clear)
-                    .frame(width: 25.0, height: 25.0)
-            }
-            .padding(.all)
+            AppBar(title: "最近查詢")
             List(recents.indices, id: \.self) { index in
                 Button {
                     // 不重覆寫入一樣的資料
@@ -53,7 +37,7 @@ struct RecentsView: View {
                     database.deleteOldRecents(amountRecent: settings.getRecentAmount())
                     recents = database.selectAllRecents()
                 }
-        }
+            }
         }
     }
 }

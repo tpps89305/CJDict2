@@ -14,6 +14,10 @@
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
 		F605FC972A540995002E1284 /* CollectionListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F605FC962A540995002E1284 /* CollectionListItem.swift */; };
 		F605FC992A542786002E1284 /* ResultListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F605FC982A542786002E1284 /* ResultListItem.swift */; };
+		F6083FB02A79FFC100A0F8BC /* FileHandleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6083FAF2A79FFC100A0F8BC /* FileHandleView.swift */; };
+		F6083FB22A7A00DD00A0F8BC /* AppBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6083FB12A7A00DD00A0F8BC /* AppBar.swift */; };
+		F6083FB52A7A0B3D00A0F8BC /* CJButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6083FB42A7A0B3D00A0F8BC /* CJButtonStyle.swift */; };
+		F6083FB72A7A2F7300A0F8BC /* CSVFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6083FB62A7A2F7300A0F8BC /* CSVFile.swift */; };
 		F642152C2A27505300710122 /* CollectionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F642152B2A27505300710122 /* CollectionsView.swift */; };
 		F64308D629ED3BCD000585DB /* ResultTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = F64308D529ED3BCD000585DB /* ResultTile.swift */; };
 		F66745FD29EE3DE70085774B /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66745FC29EE3DE70085774B /* HomeView.swift */; };
@@ -35,6 +39,10 @@
 		823E01FC461BD183FB9324B3 /* Pods_iosCJDict.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iosCJDict.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F605FC962A540995002E1284 /* CollectionListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionListItem.swift; sourceTree = "<group>"; };
 		F605FC982A542786002E1284 /* ResultListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultListItem.swift; sourceTree = "<group>"; };
+		F6083FAF2A79FFC100A0F8BC /* FileHandleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHandleView.swift; sourceTree = "<group>"; };
+		F6083FB12A7A00DD00A0F8BC /* AppBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppBar.swift; sourceTree = "<group>"; };
+		F6083FB42A7A0B3D00A0F8BC /* CJButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CJButtonStyle.swift; sourceTree = "<group>"; };
+		F6083FB62A7A2F7300A0F8BC /* CSVFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVFile.swift; sourceTree = "<group>"; };
 		F642152B2A27505300710122 /* CollectionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionsView.swift; sourceTree = "<group>"; };
 		F64308D529ED3BCD000585DB /* ResultTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultTile.swift; sourceTree = "<group>"; };
 		F66745FC29EE3DE70085774B /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -101,6 +109,7 @@
 				2152FB032600AC8F00CF470E /* iOSApp.swift */,
 				058557D7273AAEEB004C7B11 /* Preview Content */,
 				F6F9922F2A5522C400D05FB7 /* Prospects.swift */,
+				F6083FB62A7A2F7300A0F8BC /* CSVFile.swift */,
 			);
 			path = iosCJDict;
 			sourceTree = "<group>";
@@ -111,6 +120,14 @@
 				823E01FC461BD183FB9324B3 /* Pods_iosCJDict.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F6083FB82A7A351000A0F8BC /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+				F6083FB42A7A0B3D00A0F8BC /* CJButtonStyle.swift */,
+			);
+			path = Styles;
 			sourceTree = "<group>";
 		};
 		F6F992292A550BB900D05FB7 /* Entities */ = {
@@ -125,6 +142,7 @@
 		F6F9922A2A550BEC00D05FB7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F6083FB82A7A351000A0F8BC /* Styles */,
 				F64308D529ED3BCD000585DB /* ResultTile.swift */,
 				F642152B2A27505300710122 /* CollectionsView.swift */,
 				7555FF82242A565900829871 /* ContentView.swift */,
@@ -132,6 +150,8 @@
 				F66745FE29EE3F450085774B /* SettingsView.swift */,
 				F6F9922D2A55114200D05FB7 /* CollectionTile.swift */,
 				F6C7CF892A5693250051DF4A /* RecentsView.swift */,
+				F6083FAF2A79FFC100A0F8BC /* FileHandleView.swift */,
+				F6083FB12A7A00DD00A0F8BC /* AppBar.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -254,8 +274,12 @@
 				F605FC992A542786002E1284 /* ResultListItem.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				F642152C2A27505300710122 /* CollectionsView.swift in Sources */,
+				F6083FB52A7A0B3D00A0F8BC /* CJButtonStyle.swift in Sources */,
 				F66745FD29EE3DE70085774B /* HomeView.swift in Sources */,
 				F605FC972A540995002E1284 /* CollectionListItem.swift in Sources */,
+				F6083FB72A7A2F7300A0F8BC /* CSVFile.swift in Sources */,
+				F6083FB22A7A00DD00A0F8BC /* AppBar.swift in Sources */,
+				F6083FB02A79FFC100A0F8BC /* FileHandleView.swift in Sources */,
 				F6F9922E2A55114200D05FB7 /* CollectionTile.swift in Sources */,
 				F6C7CF8A2A5693250051DF4A /* RecentsView.swift in Sources */,
 				F64308D629ED3BCD000585DB /* ResultTile.swift in Sources */,

@@ -53,7 +53,7 @@ kotlin {
 }
 
 android {
-    compileSdk = 32
+    compileSdk = 35
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
         minSdk = 23

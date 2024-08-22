@@ -2,6 +2,10 @@ import SwiftUI
 import cjdict
 
 struct ContentView: View {
+    
+    @StateObject var prospects = Prospects()
+    let settings = SettingHandler(context: NSObject())
+    
     init() {
         let coloredAppearance = UINavigationBarAppearance()
         coloredAppearance.backgroundColor = UIColor(named: "Primary")
@@ -18,15 +22,35 @@ struct ContentView: View {
     }
 
     var body: some View {
-        TabView {
+        TabView(selection: $prospects.tabSelection) {
             HomeView().tabItem {
                 Image(systemName: "iphone.homebutton")
                 Text("主畫面")
             }.tag(1)
+            
+            CollectionsView().tabItem {
+                Image(systemName: "folder")
+                Text("收藏簿")
+            }.tag(2)
+            
             SettingsView().tabItem {
                 Image(systemName: "gearshape")
                 Text("設定")
-            }.tag(2)
+            }.tag(3)
+        }
+        .environmentObject(prospects)
+        .preferredColorScheme(prospects.isPreferrScheme ? prospects.theme : .none)
+        .onAppear {
+            switch settings.getTheme() {
+            case 1:
+                prospects.isPreferrScheme = true
+                prospects.theme = .light
+            case 2:
+                prospects.isPreferrScheme = true
+                prospects.theme = .dark
+            default:
+                prospects.isPreferrScheme = false
+            }
         }
     }
 }

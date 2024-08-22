@@ -1,0 +1,41 @@
+CREATE TABLE Save (
+    _id INTEGER PRIMARY KEY AUTOINCREMENT,
+    data TEXT NOT NULL
+);
+
+CREATE TABLE Recent (
+    _id INTEGER PRIMARY KEY AUTOINCREMENT,
+    data TEXT NOT NULL
+);
+
+insertSave:
+INSERT INTO Save(data)
+VALUES(?);
+
+insertRecent:
+INSERT INTO Recent(data)
+VALUES(?);
+
+selectAllSaves:
+SELECT * FROM Save;
+
+selectAllRecents:
+SELECT * FROM Recent;
+
+selectSaveByData:
+SELECT * FROM Save WHERE data = ?;
+
+removeAllSaves:
+DELETE FROM Save;
+
+removeAllRecents:
+DELETE FROM Recent;
+
+deleteSaveById:
+DELETE FROM Save WHERE _id = ?;
+
+deleteRecentsLessThenId:
+DELETE FROM Recent WHERE _id <= ?;
+
+getLastInsertId:
+SELECT last_insert_rowid();
